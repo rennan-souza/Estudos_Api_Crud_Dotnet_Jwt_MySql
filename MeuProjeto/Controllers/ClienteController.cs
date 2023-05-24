@@ -1,4 +1,5 @@
-﻿using MeuProjeto.Models;
+﻿using MeuProjeto.Dtos;
+using MeuProjeto.Models;
 using MeuProjeto.Services.IServices;
 using Microsoft.AspNetCore.Mvc;
 
@@ -25,7 +26,21 @@ namespace MeuProjeto.Controllers
                 return Ok(list);
             } catch (Exception ex)
             {
-                return BadRequest(ex);
+                return BadRequest(new { message = ex.Message });
+            }
+        }
+
+        [HttpPost]
+        [Route("/clientes")]
+        public ActionResult Cadastrar([FromBody] ClienteReq clienteReq)
+        {
+            try
+            {
+                Cliente cliente = clienteService.Cadastrar(clienteReq);
+                return Ok(cliente);
+            } catch (Exception ex)
+            {
+                return BadRequest(new { error = ex.Message });
             }
         }
     }
