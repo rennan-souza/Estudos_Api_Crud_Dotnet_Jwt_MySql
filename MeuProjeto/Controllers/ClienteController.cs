@@ -1,7 +1,9 @@
 ﻿using MeuProjeto.Dtos;
 using MeuProjeto.Models;
 using MeuProjeto.Services.IServices;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Data;
 
 namespace MeuProjeto.Controllers
 {
@@ -18,6 +20,7 @@ namespace MeuProjeto.Controllers
 
         [HttpGet]
         [Route("/clientes")]
+        [Authorize(Roles = "ADMIN, USER")]
         public ActionResult List()
         {
             try
@@ -32,6 +35,7 @@ namespace MeuProjeto.Controllers
 
         [HttpPost]
         [Route("/clientes")]
+        [Authorize(Roles = "ADMIN")]
         public ActionResult Cadastrar([FromBody] ClienteReq clienteReq)
         {
             try

@@ -10,8 +10,12 @@ namespace MeuProjeto.Repositories
         public User BuscarUsuarioPorEmail(string email)
         {
             string userSql = $"SELECT * FROM TB_USERS WHERE EMAIL = '{email}'";
-            var user = Connection.Query<User>(userSql).First();
+            var user = Connection.Query<User>(userSql).FirstOrDefault();
 
+            if (user == null )
+            {
+                return null;
+            }
 
             string rolesSql = $"SELECT ID, AUTHORITY FROM TB_ROLES JOIN TB_USERS_ROLES ON TB_USERS_ROLES.ROLE_ID = TB_ROLES.ID WHERE USER_ID = {user.Id}";
             var roles = Connection.Query<Role>(rolesSql).ToList();
