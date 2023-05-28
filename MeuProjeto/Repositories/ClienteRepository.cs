@@ -39,6 +39,10 @@ namespace MeuProjeto.Repositories
             return Connection.Query<Cliente>(sql).ToList();
         }
 
-
+        public Cliente Update(int id, ClienteReq clienteReq)
+        {
+            string sql = $"UPDATE TB_CLIENTE SET NOME = '{clienteReq.Nome}', CPF = '{clienteReq.Cpf}' WHERE ID = {id}; SELECT * FROM TB_CLIENTE WHERE id = {id};";
+            return Connection.Query<Cliente>(sql).First();
+        }
     }
 }

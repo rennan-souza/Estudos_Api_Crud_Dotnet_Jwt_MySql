@@ -57,6 +57,30 @@ namespace MeuProjeto.Services
             return cliente;
         }
 
+        public Cliente Update(int id, ClienteReq clienteReq)
+        {
+            try
+            {
+                clienteReq.Cpf = FormatarCPF(clienteReq.Cpf);
+
+                Cliente cliente = BuscarPorId(id);
+
+                if (!cliente.Cpf.Equals(clienteReq.Cpf))
+                {
+                    if (clienteRepository.ExisteCpf(clienteReq.Cpf))
+                    {
+                        throw new Exception("O CPF informado já está cadastrado");
+                    }
+                }
+
+                return clienteRepository.Update(id, clienteReq);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
         public static string FormatarCPF(string cpf)
         {
             // Remove todos os caracteres não numéricos do CPF

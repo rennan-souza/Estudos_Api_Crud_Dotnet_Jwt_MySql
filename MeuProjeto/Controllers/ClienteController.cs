@@ -63,5 +63,21 @@ namespace MeuProjeto.Controllers
                 return NotFound(new { message = ex.Message });
             }
         }
+
+        [HttpPut]
+        [Route("/clientes/{id}")]
+        [Authorize(Roles = "ADMIN")]
+        public ActionResult Update(int id, [FromBody] ClienteReq clienteReq)
+        {
+            try
+            {
+                Cliente cliente = clienteService.Update(id, clienteReq);
+                return Ok(cliente);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { error = ex.Message });
+            }
+        }
     }
 }
