@@ -56,15 +56,11 @@ namespace MeuProjeto.Controllers
             try
             {
                 Cliente cliente = clienteService.BuscarPorId(id);
-                if(cliente == null)
-                {
-                    return NotFound(new { message = "Nenhum cliente encontrado" });
-                }
                 return Ok(cliente);
             }
             catch (Exception ex)
             {
-                return BadRequest(new { message = ex.Message });
+                return NotFound(new { message = ex.Message });
             }
         }
     }

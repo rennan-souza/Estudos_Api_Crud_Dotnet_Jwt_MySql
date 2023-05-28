@@ -2,6 +2,7 @@
 using MeuProjeto.Models;
 using MeuProjeto.Repositories.IRepositories;
 using MeuProjeto.Services.IServices;
+using MySqlX.XDevAPI;
 using System.Text.RegularExpressions;
 
 namespace MeuProjeto.Services
@@ -48,7 +49,12 @@ namespace MeuProjeto.Services
 
         public Cliente BuscarPorId(int id)
         {
-            return clienteRepository.BuscarPorId(id);
+            Cliente cliente = clienteRepository.BuscarPorId(id);
+            if (cliente == null)
+            {
+                throw new Exception("Nenhum cliente encontrado");
+            }
+            return cliente;
         }
 
         public static string FormatarCPF(string cpf)
