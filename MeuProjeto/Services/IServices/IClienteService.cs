@@ -6,7 +6,7 @@ namespace MeuProjeto.Services.IServices
     public interface IClienteService
     {
         List<Cliente> List();
-
         Cliente Cadastrar(ClienteReq clienteReq);
+        Cliente BuscarPorId(int id);
     }
 }

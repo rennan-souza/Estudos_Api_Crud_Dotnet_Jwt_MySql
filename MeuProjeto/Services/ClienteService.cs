@@ -46,6 +46,11 @@ namespace MeuProjeto.Services
             }
         }
 
+        public Cliente BuscarPorId(int id)
+        {
+            return clienteRepository.BuscarPorId(id);
+        }
+
         public static string FormatarCPF(string cpf)
         {
             // Remove todos os caracteres não numéricos do CPF

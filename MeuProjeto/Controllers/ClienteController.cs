@@ -47,5 +47,25 @@ namespace MeuProjeto.Controllers
                 return BadRequest(new { error = ex.Message });
             }
         }
+
+        [HttpGet]
+        [Route("/clientes/{id}")]
+        [Authorize(Roles = "ADMIN, USER")]
+        public ActionResult BuscarPorId(int id)
+        {
+            try
+            {
+                Cliente cliente = clienteService.BuscarPorId(id);
+                if(cliente == null)
+                {
+                    return NotFound(new { message = "Nenhum cliente encontrado" });
+                }
+                return Ok(cliente);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
+        }
     }
 }

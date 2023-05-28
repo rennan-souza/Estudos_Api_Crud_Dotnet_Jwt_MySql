@@ -8,6 +8,12 @@ namespace MeuProjeto.Repositories
 {
     public class ClienteRepository : ConnectionMySql, IClienteRepository
     {
+        public Cliente BuscarPorId(int id)
+        {
+            string sql = $"SELECT * FROM TB_CLIENTE WHERE ID = {id}";
+            return Connection.Query<Cliente>(sql).FirstOrDefault();
+        }
+
         public Cliente Cadastrar(ClienteReq clienteReq)
         {
             string sql = $"INSERT INTO TB_CLIENTE (NOME, CPF) VALUES ('{clienteReq.Nome}', '{clienteReq.Cpf}'); SELECT * FROM TB_CLIENTE WHERE id = LAST_INSERT_ID();";

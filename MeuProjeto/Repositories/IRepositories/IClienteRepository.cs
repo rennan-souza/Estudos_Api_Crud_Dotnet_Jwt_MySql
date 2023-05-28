@@ -8,5 +8,6 @@ namespace MeuProjeto.Repositories.IRepositories
         List<Cliente> List();
         Cliente Cadastrar(ClienteReq clienteReq);
         bool ExisteCpf(string cpf);
+        Cliente BuscarPorId(int id);
     }
 }
