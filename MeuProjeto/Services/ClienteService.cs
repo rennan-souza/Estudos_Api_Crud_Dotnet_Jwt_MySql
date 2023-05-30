@@ -97,5 +97,16 @@ namespace MeuProjeto.Services
 
             return cpfFormatado;
         }
+
+        public void Delete(int id)
+        {
+            try
+            {
+                clienteRepository.Delete(id);
+            } catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }

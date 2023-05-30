@@ -20,6 +20,12 @@ namespace MeuProjeto.Repositories
             return Connection.Query<Cliente>(sql).First();
         }
 
+        public void Delete(int id)
+        {
+            string sql = $"DELETE FROM TB_CLIENTE WHERE ID = {id}";
+            Connection.Execute(sql);
+        }
+
         public bool ExisteCpf(string cpf)
         {
             string sql = $"SELECT EXISTS(SELECT 1 FROM TB_CLIENTE WHERE CPF = '{cpf}') AS cpf_existe;";

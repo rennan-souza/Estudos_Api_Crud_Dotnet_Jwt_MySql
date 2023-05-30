@@ -9,5 +9,6 @@ namespace MeuProjeto.Services.IServices
         Cliente Cadastrar(ClienteReq clienteReq);
         Cliente BuscarPorId(int id);
         Cliente Update(int id, ClienteReq clienteReq);
+        void Delete(int id);
     }
 }

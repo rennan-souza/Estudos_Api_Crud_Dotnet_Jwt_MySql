@@ -79,5 +79,21 @@ namespace MeuProjeto.Controllers
                 return BadRequest(new { error = ex.Message });
             }
         }
+
+        [HttpDelete]
+        [Route("/clientes/{id}")]
+        [Authorize(Roles = "ADMIN")]
+        public ActionResult Delete(int id)
+        {
+            try
+            {
+                clienteService.Delete(id);
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { error = ex.Message });
+            }
+        }
     }
 }
